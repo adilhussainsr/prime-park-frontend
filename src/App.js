@@ -59,7 +59,7 @@ class App extends Component {
   componentDidMount = () => {
     // connect to the socket server
     // socket = io('ws://localhost:5000');
-    socket = io('ws://54.144.20.33:5000');
+    socket = io(process.env.REACT_APP_API_SOCKET);
 
     // when connected, look for when the server emits the updated count
     socket.on('counter updated', function(countFromServer) {

@@ -1,0 +1,16 @@
+.dc-body.performance-review .dc-breadcrumb-header-wrap{
+  justify-content: flex-end;
+  margin-bottom: 0;	
+}
+.dc-body.performance-review .dc-breadcrumb{
+	width: 100%;
+}
+.sc-input-wrap.date-range-input {
+    position: relative;
+}
+.rdrDateRangePickerWrapper{
+	position: absolute;
+    right: 0;
+    top: 100%;
+    border: 1px solid #eff2f7;
+}

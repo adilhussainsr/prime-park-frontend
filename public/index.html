@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!--
+* CoreUI Free - React.js Admin Template
+* @version v3.2.0
+* @link https://coreui.io/pro/react/
+* Copyright (c) 2020 creativeLabs Łukasz Holeczek
+* License MIT
+-->
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta name="keyword" content="">
+  <title>Prime Park</title>
+  <!--
+      manifest.json provides metadata used when your web app is added to the
+      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+    -->
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+  <script src="%PUBLIC_URL%/js/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="%PUBLIC_URL%/js/bootstrap.min.css">
+  <script src="%PUBLIC_URL%/js/bootstrap.min.js"></script>
+  <script src="%PUBLIC_URL%/js/custom.js"></script>
+  <!-- <script src="%PUBLIC_URL%/js/custom-admin.js"></script> -->
+  <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    
+</head>
+
+<body>
+  <noscript>
+    You need to enable JavaScript to run this app.
+  </noscript>
+  <div class="bs-example">
+    <button type="button" style="display:none" class="btn btn-lg btn-primary btnsm">Show Modal</button>
+    <button type="button" style="display:none" class="btn btn-lg btn-primary btnsmcls">Close Modal</button>
+ 
+    <div id="myModal" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content" style="bottom: 45%;">
+                <div class="modal-header" style="margin-bottom: 20px;">
+                    <h5 class="modal-title">Attention!!</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body mbody" style="text-align: center;margin-bottom: 20px;">
+                    Notification pending for reservation !
+                   
+                </div>
+                <div class="htext" style="display:none">abc</div>
+                <div class="modal-footer" style="background-color:#f4f4f4">
+                    <button type="button" class="btn btn-secondary snoozefor2min" style="background-color: #64d742
+                    ;color:#fff;border-color: #64d742;border: 2px solid #64d742;" data-dismiss="modal">Snooze for 2 min</button>
+                    <button type="button" class="btn btn-primary seenotifiction" style="background-color: #fff
+                    ;color:#64d742;border-color: #64d742;border: 2px solid #64d742;">See notification</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+  $(document).ready(function(){
+      $(".btnsm").click(function(){
+          $("#myModal").modal('show');
+      });
+      $(".btnsmcls").click(function(){
+          $("#myModal").modal('hide');
+      });
+  });
+</script>
+<style>
+  .modal-content{
+    bottom: 30%;
+    margin: auto;
+    width: 25%;
+  }
+</style>
+  <div id="root"></div>
+  
+
+  <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+   
+</body>
+
+</html>

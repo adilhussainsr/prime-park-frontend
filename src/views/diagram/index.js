@@ -44,67 +44,73 @@ class LotDiagram extends Component {
       .then((response) => {
         if(response.status === 200){
         if (response.data.status === 200) {
-          console.log(response.data.parking)
+          console.log('D lenght->', response.data.parking.D[1]);
+        
          this.setState({
               isLoaded: true,
               A: response.data.parking.A[1],
               Arowcount:Object.keys(response.data.parking.A[1]).length,
-              Acolcount:response.data.parking.A[1][1].length,
-              Acolcounttotal:(response.data.parking.A[1][1].length*Object.keys(response.data.parking.A[1]).length),
+              Acolcount:Object.keys(response.data.parking.A[1]['42R']).length,
+              Acolcounttotal:(Object.keys(response.data.parking.A[1]['42R']).length*Object.keys(response.data.parking.A[1]).length),
 
               B: response.data.parking.B[1],
               Browcount:Object.keys(response.data.parking.B[1]).length,
-              Bcolcount:response.data.parking.B[1][29].length,
-              Bcolcounttotal:(response.data.parking.B[1][29].length*Object.keys(response.data.parking.B[1]).length),       
+              Bcolcount:Object.keys(response.data.parking.B[1]['70L']).length,
+              Bcolcounttotal:(Object.keys(response.data.parking.B[1]['70L']).length*Object.keys(response.data.parking.B[1]).length),       
               
-              //C: response.data.parking.C[1],
-              //Crowcount:Object.keys(response.data.parking.C[1]).length,
-              ///Ccolcount:response.data.parking.C[1][38].length,
-              //Ccolcounttotal:(response.data.parking.C[1][38].length*Object.keys(response.data.parking.C[1]).length),       
+              C: response.data.parking.C[1],
+              Crowcount:Object.keys(response.data.parking.C[1]['C']).length,
+              Ccolcount: Object.keys(response.data.parking.C[1]).length,
+              Ccolcounttotal:(Object.keys(response.data.parking.C[1]['C']).length*Object.keys(response.data.parking.C[1]).length),       
               D: response.data.parking.D[1],
               Drowcount:Object.keys(response.data.parking.D[1]).length,
-              Dcolcount:response.data.parking.D[1][39].length,
-              Dcolcounttotal:(response.data.parking.D[1][39].length*Object.keys(response.data.parking.D[1]).length),       
+              Dcolcount: Object.keys(response.data.parking.D[1]['26R']).length,
+              Dcolcounttotal:(Object.keys(response.data.parking.D[1]['26R']).length*Object.keys(response.data.parking.D[1]).length),       
             
-              E: response.data.parking.E[1],
-              Erowcount:Object.keys(response.data.parking.E[1]).length,
-              Ecolcount:response.data.parking.E[1][63].length,
-              Ecolcounttotal:(response.data.parking.E[1][63].length*Object.keys(response.data.parking.E[1]).length),       
+              E: response.data.parking.E[27],
+              Erowcount:Object.keys(response.data.parking.E[27]).length,
+              Ecolcount: Object.keys(response.data.parking.E[27]['17R']).length,
+              Ecolcounttotal:(Object.keys(response.data.parking.E[27]['17R']).length*Object.keys(response.data.parking.E[27]).length),       
             
-              G: response.data.parking.G[1],
-              Growcount:Object.keys(response.data.parking.G[1]).length,
-              Gcolcount:response.data.parking.G[1][87].length,
-              Gcolcounttotal:(response.data.parking.G[1][87].length*Object.keys(response.data.parking.G[1]).length),       
+              G: response.data.parking.G[4],
+              Growcount:Object.keys(response.data.parking.G[4]).length,
+              Gcolcount:Object.keys(response.data.parking.G[4]['F02']).length,
+              Gcolcounttotal:(Object.keys(response.data.parking.G[4]['F02']).length*Object.keys(response.data.parking.G[4]).length),       
             
-              M: response.data.parking.M[1],
-              Mrowcount:Object.keys(response.data.parking.M[1]).length,
-              Mcolcount:response.data.parking.M[1][5].length,
-              Mcolcounttotal:(response.data.parking.M[1][5].length*Object.keys(response.data.parking.M[1]).length),       
+              // M: response.data.parking.M[1],
+              // Mrowcount:Object.keys(response.data.parking.M[1]).length,
+              // Mcolcount:response.data.parking.M[1][5].length,
+              // Mcolcounttotal:(response.data.parking.M[1][5].length*Object.keys(response.data.parking.M[1]).length),       
             
-              F1: response.data.parking.F[1],
-              F1rowcount:Object.keys(response.data.parking.F[1]).length,
-              F1colcount:response.data.parking.F[1][72].length,
-              F1colcounttotal:(response.data.parking.F[1][72].length*Object.keys(response.data.parking.F[1]).length),       
+              F1: response.data.parking.F[8],
+              F1rowcount:Object.keys(response.data.parking.F[8]).length,
+              F1colcount: Object.keys(response.data.parking.F[8]['F03']).length,
+              F1colcounttotal: ( Object.keys(response.data.parking.F[8]['F03']).length*Object.keys(response.data.parking.F[8]).length),       
             
-              F2: response.data.parking.F[2],
-              F2rowcount:Object.keys(response.data.parking.F[2]).length,
-              F2colcount:response.data.parking.F[2][79].length,
-              F2colcounttotal:(response.data.parking.F[2][79].length*Object.keys(response.data.parking.F[2]).length),
 
-              F3: response.data.parking.F3[2],
-              F3rowcount:Object.keys(response.data.parking.F3[2]).length,
-              F3colcount:response.data.parking.F3[2][11].length,
-              F3colcounttotal:(response.data.parking.F3[2][11].length*Object.keys(response.data.parking.F3[2]).length),
+              F2: response.data.parking.F[21],
+              F2rowcount:Object.keys(response.data.parking.F[21]).length,
+              F2colcount: Object.keys(response.data.parking.F[21]['F01']).length,
+              F2colcounttotal: ( Object.keys(response.data.parking.F[21]['F01']).length*Object.keys(response.data.parking.F[21]).length),
+              // F2: response.data.parking.F[2],
+              // F2rowcount:Object.keys(response.data.parking.F[2]).length,
+              // F2colcount:response.data.parking.F[2][79].length,
+              // F2colcounttotal:(response.data.parking.F[2][79].length*Object.keys(response.data.parking.F[2]).length),
+
+              // F3: response.data.parking.F3[2],
+              // F3rowcount:Object.keys(response.data.parking.F3[2]).length,
+              // F3colcount:response.data.parking.F3[2][11].length,
+              // F3colcounttotal:(response.data.parking.F3[2][11].length*Object.keys(response.data.parking.F3[2]).length),
               
-              R: response.data.parking.R[1],
-              Rrowcount:Object.keys(response.data.parking.R[1]).length,
-              Rcolcount:response.data.parking.R[1][11].length,
-              Rcolcounttotal:(response.data.parking.R[1][11].length*Object.keys(response.data.parking.R[1]).length), 
+              R: response.data.parking.R[0],
+              Rrowcount:Object.keys(response.data.parking.R[0]).length,
+              Rcolcount:Object.keys(response.data.parking.R[0]['16R']).length,
+              Rcolcounttotal:(Object.keys(response.data.parking.R[0]['16R']).length*Object.keys(response.data.parking.R[0]).length), 
 
-              L: response.data.parking.L[1],
-              Lrowcount:Object.keys(response.data.parking.L[1]).length,
-              Lcolcount:response.data.parking.L[1][11].length,
-              Lcolcounttotal:(response.data.parking.L[1][11].length*Object.keys(response.data.parking.L[1]).length),       
+              L: response.data.parking.L[0],
+              Lrowcount:Object.keys(response.data.parking.L[0]).length,
+              Lcolcount: Object.keys(response.data.parking.L[0]['81L']).length,
+              Lcolcounttotal:(Object.keys(response.data.parking.L[0]['81L']).length * Object.keys(response.data.parking.L[0]).length),       
               
             
             });
@@ -154,18 +160,43 @@ class LotDiagram extends Component {
         <div className="lot-name">A</div>
         </div>
         
-       { Object.keys(this.state.A).map((key, items) => (
-           <div className="ldc-body">
-        { this.state.A[items] && this.state.A[items].map((item, i) => (
-        
-        <div className={"lot-box "+item.status}>{item.display_slot}</div>
-        ))}
-         </div>
-       ))}
-        
+        {/* {Object.keys(this.state.A).map((key, items) => (
+  <div key={key} className="ldc-body">
+    {this.state.A[items] && (
+      Array.isArray(this.state.A[items]) ? (
+        this.state.A[items].map((item, i) => (
+          <div key={i} className={"lot-box " + item.status}>
+            {item.display_slot}
+          </div>
+        ))
+      ) : (
+        Object.keys(this.state.A[items]).map((innerKey, j) => (
+          <div key={j} className={"lot-box " + this.state.A[items][innerKey].status}>
+            {this.state.A[items][innerKey].display_slot}
+          </div>
+        ))
+      )
+    )}
+  </div>
+))} */}
+
+{Object.keys(this.state.A).map((key, index) => (
+  <div key={index} className="ldc-body">
+    {
+        Object.keys(this.state.A[key]).map((innerKey, j) => (
+          <div key={j} className={"lot-box " + this.state.A[key][innerKey].status}>
+            {this.state.A[key][innerKey].display_slot}
+          </div>
+        ))
+      
+    }
+  </div>
+))}
+
+  
         
         </div>
-
+        {/* <div className="ld-col col-5"></div> */}
         <div className="ld-col-content lot-b">
         <div className="ldc-header">
         <div className="lot-detail">
@@ -174,19 +205,27 @@ class LotDiagram extends Component {
         </div>
         <div className="lot-name">B</div>
         </div>
-        { Object.keys(this.state.B).map((key, bitems) => (
-           <div className="ldc-body">
-        { this.state.B[key] && this.state.B[key].map((bitem, i) => (
-        
-        <div className={"lot-box "+bitem.status}>{bitem.display_slot}</div>
-        ))}
-         </div>
-       ))}
+        <div className="ldc-body">
+        {Object.keys(this.state.B).map((key, index) => (
+  <div key={"B-" +index} className="ldc-body">
+    {
+        Object.keys(this.state.B[key]).map((slotKey, j) => (
+          <div key={j} className={"lot-box " + this.state.B[key][slotKey].status}>
+            {this.state.B[key][slotKey].display_slot}
+          </div>
+        ))
+      
+    }
+  </div>
+))}
+
+</div>
+
 
         </div>
 
         {/* L block start  */}
-        <div className="ld-col-content lot-b">
+        {/* <div className="ld-col-content lot-b">
         <div className="ldc-header">
         <div className="lot-detail">
         <h4>{this.state.Lrowcount}*{this.state.Lcolcount}<small>(All Cars)</small>{this.state.Lcolcounttotal}</h4>
@@ -206,26 +245,30 @@ class LotDiagram extends Component {
          </div>
        ))}
 
-        </div>
+        </div> */}
         {/* L block ends  */}
 
 
-        <div className="ld-col-content lot-c margintop710px">
+        <div className="ld-col-content lot-d margintop710px">
         <div className="ldc-header">
         <div className="lot-detail">
-        <h4>{this.state.Crowcount}*{this.state.Ccolcount}<small>(All Cars)</small>{this.state.Ccolcounttotal}</h4>
+        <h4>{this.state.Lrowcount}*{this.state.Lcolcount}<small>(All Cars)</small>{this.state.Lcolcounttotal}</h4>
         <p>Fast Moving</p>
         </div>
-        <div className="lot-name">C</div>
+        <div className="lot-name">L</div>
         </div>
-        { Object.keys(this.state.C).map((key, bitems) => (
-           <div className="ldc-body">
-        { this.state.C[key] && this.state.C[key].map((bitem, i) => (
-        
-        <div className={"lot-box "+bitem.status}>{bitem.display_slot}</div>
+                  {Object.keys(this.state.L).map((key, bitems) => (
+            <div className="ldc-body" key={key}> {/* Add a unique key */}
+              {
+                  Object.values(this.state.L[key]).map((bitem, i) => ( 
+                    <div key={i} className={"lot-box " + bitem.status}>
+                      {bitem.display_slot}
+                    </div>
+                  ))
+                }
+            </div>
         ))}
-         </div>
-       ))}
+
         </div>
         <div className="ld-col-content lot-office">
         <div className="office-lot">Office</div>
@@ -233,19 +276,23 @@ class LotDiagram extends Component {
         <div className="ld-col-content lot-f">
         <div className="ldc-header">
         <div className="lot-detail">
-        <h4>{this.state.F1rowcount}*{this.state.F1colcount}<small>(All Cars)</small>{this.state.F1colcounttotal}</h4>
+        <h4>{this.state.F2rowcount}*{this.state.F2colcount}<small>(All Cars)</small>{this.state.F2colcounttotal}</h4>
         <p>Fast Moving</p>
         </div>
         <div className="lot-name">F</div>
         </div>
-        { Object.keys(this.state.F1).map((key, bitems) => (
-           <div className="ldc-body">
-        { this.state.F1[key] && this.state.F1[key].map((bitem, i) => (
-        
-        <div className={"lot-box "+bitem.status}>{bitem.display_slot}</div>
-        ))}
+        {Object.keys(this.state.F2).map((key, bitems) => (
+  <div className="ldc-body" key={key}>
+    {this.state.F2[key] && (
+      Object.values(this.state.F2[key]).map((bitem, i) => (
+        <div key={i} className={"lot-box " + bitem.status}>
+          {bitem.display_slot}
         </div>
-        ))}
+      ))
+    )}
+  </div>
+))}
+
         </div>
        
         </div>
@@ -253,19 +300,15 @@ class LotDiagram extends Component {
         <div className="ld-col-content lot-30car">
         <div className="ldc-header">
         <div className="lot-detail">
-        
-        <h4>{this.state.Mcolcounttotal} cars</h4>
-       
+        <h4>{this.state.Ccolcounttotal} cars</h4>
         </div>
+        <div className="lot-name">C</div>
         </div>
         <div className="ldc-body">
-        { Object.keys(this.state.M).map((key, bitems) => (
-          
-         this.state.M[key] && this.state.M[key].map((bitem, i) => (
-        
-        <div className={"lot-box "+bitem.status}>{bitem.display_slot}</div>
+        { Object.keys(this.state.C).map((key, bitems) => (
+         Object.keys(this.state.C[key]).map((bitem, i) => (
+        <div className={"lot-box "+this.state.C[key][bitem]?.status}> {this.state.C[key][bitem]?.display_slot}</div>
         ))
-      
         ))}
         </div>
         </div>
@@ -281,19 +324,17 @@ class LotDiagram extends Component {
         <div className="lot-name">D</div>
         </div>
       
-        { Object.keys(this.state.D).map((key, bitems) => (
-           <div className="ldc-body">
-        { this.state.D[key] && this.state.D[key].map((bitem, i) => (
-          
-          bitem?.status?  
-          <>
-            <div className={"lot-box "+bitem?.status}>{bitem?.display_slot}</div>
-          </>
-        :null
-        ))}
-        </div>
-        ))}
-      
+        <div className="ldc-body">
+        {Object.keys(this.state.D).map((key) => (Object.values(this.state.D[key]).map((bitem, i) => ( 
+      <div key={i} className={"lot-box " + bitem.status}>
+        {bitem.display_slot}
+      </div>
+    ))
+))}
+
+
+</div>
+
         </div>
 
         <div className="ld-col-content lot-e">
@@ -305,14 +346,18 @@ class LotDiagram extends Component {
         </div>
         <div className="lot-name">E</div>
         </div>
-        { Object.keys(this.state.E).map((key, bitems) => (
-           <div className="ldc-body">
-        { this.state.E[key] && this.state.E[key].map((bitem, i) => (
-        
-        <div className={"lot-box "+bitem.status}>{bitem.display_slot}</div>
-        ))}
-        </div>
-        ))}
+        {Object.keys(this.state.E).map((key) => (
+  <div key={key} className="ldc-body">
+    {
+        Object.values(this.state.E[key]).map((bitem, i) => (
+          <div key={i} className={"lot-box " + bitem.status}>
+            {bitem.display_slot}
+          </div>
+        ))
+      }
+  </div>
+))}
+
       
         </div>
 
@@ -330,18 +375,20 @@ class LotDiagram extends Component {
         </div>
         <div className="lot-name">R</div>
         </div>
-        { Object.keys(this.state.R).map((key, bitems) => (
-           <div className="ldc-body">
-        { this.state.R[key] && this.state.R[key].map((bitem, i) => (
-        
-        bitem?.status?  
-          <>
-            <div className={"lot-box "+bitem?.status}>{bitem?.display_slot}</div>
-          </>
-        :null
-        ))}
-        </div>
-        ))}
+        {Object.keys(this.state.R).map((key) => (
+  <div key={key} className="ldc-body">
+    {this.state.R[key] ? (
+      Object.keys(this.state.R[key]).map((innerKey, i) => (
+        this.state.R[key][innerKey].status ? (
+          <div key={i} className={"lot-box " + this.state.R[key][innerKey].status}>
+            {this.state.R[key][innerKey].display_slot}
+          </div>
+        ) : null
+      ))
+    ) : null}
+  </div>
+))}
+
       
         </div>
 
@@ -352,20 +399,24 @@ class LotDiagram extends Component {
         <div className="ld-col-content lot-e-5">
         <div className="ldc-header">
         <div className="lot-detail">
-        <h4>{this.state.F2rowcount}*{this.state.F2colcount}<small>(All Cars)</small>{this.state.F2colcounttotal}</h4>
+        <h4>{this.state.Growcount}*{this.state.Gcolcount}<small>(All Cars)</small>{this.state.Gcolcounttotal}</h4>
        
         <p>Fast Moving</p>
         </div>
         <div className="lot-name">G</div>
         </div>
-        { Object.keys(this.state.F2).map((key, bitems) => (
-           <div className="ldc-body">
-        { this.state.F2[key] && this.state.F2[key].map((bitem, i) => (
-        
-        <div className={"lot-box "+bitem.status}>{ bitem.display_slot}</div>
-        ))}
+        {Object.keys(this.state.G).map((key) => (
+  <div key={key} className="ldc-body">
+    {this.state.G[key] ? (
+      Object.keys(this.state.G[key]).map((slotKey) => (
+        <div key={slotKey} className={"lot-box " + this.state.G[key][slotKey].status}>
+          {this.state.G[key][slotKey].display_slot}
         </div>
-        ))}
+      ))
+    ) : null}
+  </div>
+))}
+
         </div>
 
 
@@ -378,17 +429,17 @@ class LotDiagram extends Component {
         </div>
         <div className="lot-name">F</div>
         </div>
-        { Object.keys(this.state.F3).map((key, bitems) => (
-           <div className="ldc-body">
-        { this.state.F3[key] && this.state.F3[key].map((bitem, i) => (
-          bitem?.status?  
-            <>
-              <div className={"lot-box "+bitem?.status}>{bitem?.display_slot}</div>
-            </>
-          :null
-        ))}
+        {Object.keys(this.state.F2).map((key) => (
+  <div key={key} className="ldc-body">
+    {this.state.F2[key] ? (
+      Object.keys(this.state.F2[key]).map((slotKey) => (
+        <div key={slotKey} className={"lot-box " + this.state.F2[key][slotKey].status}>
+          {this.state.F2[key][slotKey].display_slot}
         </div>
-        ))}
+      ))
+    ) : null}
+  </div>
+))}
         </div>
 
 

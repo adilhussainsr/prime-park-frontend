@@ -5,8 +5,8 @@ export function _callApi(data, url, headerdata = '', method = 1) {
     var result;
 
     let defaultSetting = {
-        //"_SERVERURL" :"http://localhost:8000/api/v1/",
-        //"_SERVERURL" :process.env.REACT_APP_API_URL,
+        "_SERVERURL" :"http://localhost:8000/api/v1/",
+        // "_SERVERURL" :process.env.REACT_APP_API_URL,
        }
     let siteSetting = defaultSetting;
     switch (process.env.REACT_APP_ENV) {

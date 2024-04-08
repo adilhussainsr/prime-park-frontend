@@ -112,43 +112,42 @@ SuggestionDataPopup(name,value){
       'mobile_number': this.state.mobile_number,
       'ticket_id': this.state.ticket_id,
       'reservation_id': this.state.reservation_id,
-    }
+    };
+    
     var headerdata = "";
     var s = _callApi(data, 'booking/search', headerdata)
-      .then((response) => { console.log(response)
-        if (response.status == 200) {
+      .then((response) => { 
+        console.log(response);
+        if (response.status === 200) {
           if (response.data.status === 200) {
-           var booking=response.data.booking;
-        
-          // if(booking.is_checked_out==false){
-            var self = this;
-            self.props.history.push({
-              pathname: '/checkout/checkout_review/'+booking.id,
-
-            })
-          
-      //   }else{
-      //     this.setState({ message: 'Checkout already completed' });
-      //     setTimeout(
-      //       () => this.setState({ message: '' }),
-      //       2000
-      //     );
-      //   }
-      // }
+            var booking = response.data.booking;
+            if (booking) { // Check if booking data exists
+              // if(booking.is_checked_out==false){
+              var self = this;
+              self.props.history.push({
+                pathname: '/checkout/checkout_review/'+booking.id,
+              });
+            } else {
+              // Handle case when no data is available
+              this.setState({ message: 'No booking data found' });
+              setTimeout(() => this.setState({ message: '' }), 2000);
+            }
+          } else {
+            this.setState({ message: response.data.msg });
+            setTimeout(() => this.setState({ message: '' }), 2000);
           }
-        
-        }else{
-					this.setState({ message: response.data.msg });
-							setTimeout(
-								() => this.setState({ message: '' }),
-								2000
-							);
+        } else {
+          this.setState({ message: 'Error: ' + response.statusText });
+          setTimeout(() => this.setState({ message: '' }), 2000);
         }
       })
+      .catch((error) => {
+        this.setState({ message: 'Error: ' + error.message });
+        setTimeout(() => this.setState({ message: '' }), 2000);
+      });
+    
 
-  }
-
-
+    }
 
   onChange(event) {
     event.preventDefault();

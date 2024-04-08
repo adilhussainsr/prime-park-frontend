@@ -2670,6 +2670,7 @@ span[class*="ion-"] {
   font-weight: bold;
   line-height: 1.53;
   color: #303030;
+  margin-right: 5px;
 }
 .lot-detail h4 small{
   margin: 0 6px 0 3px;	
@@ -2715,6 +2716,7 @@ span[class*="ion-"] {
 	-webkit-box-shadow: 0 3px 10px 0 rgba(2, 0, 140, 0.1);
 	        box-shadow: 0 3px 10px 0 rgba(2, 0, 140, 0.1);
     background-color: #ffffff;
+	width: 100%;
 }
 .ldc-body .lot-box{
 	margin: 0 4px 8px 4px;

@@ -3712,6 +3712,9 @@ span[class*="ion-"] {
 .error{
 	color: red;
 }
+.success {
+	color: green;
+}
 .suggestion-wrap{
 	padding: 10px 0;
 	position: absolute;

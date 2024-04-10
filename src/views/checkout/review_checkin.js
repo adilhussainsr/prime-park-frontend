@@ -49,6 +49,8 @@ class ReviewCheckin extends Component {
       timein: {},
       timeout: {},
       vendor_id: '',
+      slot: '',
+      oldSlot: '',
       carType: {},
       disablePastDt:disablePast
       ,disablePastDts:disablePast,
@@ -68,7 +70,9 @@ class ReviewCheckin extends Component {
         timeout: '',
       },
       numberPassengers: 5,
-
+      saveDisabled: false,
+      slotMessage: {},
+      parking_lot_id: ''
     }
     var headerdata = "";
     var data = {};
@@ -103,7 +107,7 @@ class ReviewCheckin extends Component {
 
       });
 
-    var s = _callApi(data, 'booking/receipt/' + this.state.id, headerdata, 2)
+    _callApi(data, 'booking/receipt/' + this.state.id, headerdata, 2)
       .then((response) => {
         if (response.status == 200) {
           if (response.data.status === 200) {
@@ -121,6 +125,8 @@ class ReviewCheckin extends Component {
               id: d.id,
               vendor_id: d.vendor_id,
               slot: d.parking?d.parking.display_slot:null,
+              parking_lot_id: d.parking?d.parking.parking_lot_id:null,
+              oldSlot: d.parking?d.parking.display_slot:null,
               car_type_id: d.car_type_id,
               checkout: new Date(d.pick_up_time),
               checkin: new Date(d.reservation_time),
@@ -162,8 +168,9 @@ class ReviewCheckin extends Component {
     this.submit = this.submit.bind(this);
     this.onChange = this.onChange.bind(this);
     this.calculate = this.calculate.bind(this);
-    this.getCarType = this.getCarType.bind(this)
-
+    this.getCarType = this.getCarType.bind(this);
+    this.onSlotIdChange = this.onSlotIdChange.bind(this);
+    this.timer = null;
   }
   _onInputChangeIn = e => {
 
@@ -173,8 +180,6 @@ class ReviewCheckin extends Component {
     this.setState({ checkin: value }, () => {
       setTimeout(() => this.calculate(), 100);
     })
-
-
   }
   _onInputChangeOut = e => {
     const value = e.target ? e.target.value : e;
@@ -384,6 +389,38 @@ class ReviewCheckin extends Component {
     // console.log(booking)
   }
 
+  onSlotIdChange(event) {
+    this.setState({ slot: event.target.value, saveDisabled: true });
+
+    clearTimeout(this.timer);
+    if (event.target.value == this.state.oldSlot) {
+      return this.setState({ slotMessage: {}, saveDisabled: false });
+    }
+
+    // Set a new timer to update the state after 500ms
+    this.timer = setTimeout(() => {
+      _callApi({
+        params: {
+          slot: this.state.slot,
+          parkingLotId:this.state.parking_lot_id
+        }
+      }, 'parking/parkingSlotStatus', '', 2)
+      .then((response) => {
+        if (response.status == 200) {
+          if (response.data.status === 200) {
+            var slot = response.data.slot;
+            if (slot=='vacant') {
+              return this.setState({ slotMessage: {success: true, msg:'Slot is vacant'}, saveDisabled: false });
+            } else if (slot == 'occupied'){
+              return this.setState({ slotMessage: {success: false, msg:'Slot is Occupied'}, saveDisabled: true });
+            } else {
+              return this.setState({ slotMessage: {success: false, msg:'Invalid slot number'}, saveDisabled: true });
+            }
+          }}
+          return this.setState({ slotMessage: {success: false, msg:'Something went wrong'}, saveDisabled: true });
+      });
+    }, 1000);
+  }
   
   submit(event) {
     event.preventDefault();
@@ -411,6 +448,8 @@ class ReviewCheckin extends Component {
     data.reservation_id = this.state.reservation_id;
     data.plate_number = this.state.plate_number;
     data.passengers = this.state.passengers;
+    data.slot = this.state.slot;
+    data.oldSlot = this.state.oldSlot;
 
 
 
@@ -422,12 +461,12 @@ class ReviewCheckin extends Component {
           if (response.data.status === 200) {
             // console.log(response.data)
             var self = this;
-            self.props.history.push({
+            return self.props.history.push({
               pathname: '/checkout/checkout_receipt/' + this.state.id,
-
             })
           }
         }
+        // alert('failed to save');
       })
   }
   calculateDays = (startTime, endTime) => {
@@ -695,7 +734,8 @@ class ReviewCheckin extends Component {
                     </div>
                     <div class="sc-input-col">
                       <label class="sc-label">Slot No.</label>
-                      <input type="text" class="sc-custom-form" readOnly value={this.state.slot?this.state.slot:'-'} />
+                      <input type="text" class="sc-custom-form" value={this.state.slot ? this.state.slot : ''} onChange= {this.onSlotIdChange} />
+                      <div className={this.state.slotMessage.success ? "success": "error"}>{this.state.slotMessage?.msg}</div>
                     </div>
                   </div>
                 </div>
@@ -817,7 +857,7 @@ class ReviewCheckin extends Component {
           </div>
         </div>
         <div class="dc-footer">
-          <button type="button" onClick={this.submit} class="pp-custom-btn">Save</button>
+          <button type="button" disabled={this.state.saveDisabled} onClick={this.submit} class="pp-custom-btn">Save</button>
         </div>
       </div>
 

@@ -47,7 +47,7 @@ this.inventoryData=this.inventoryData.bind(this)
 	var headerdata = "";
 	var data = {};
 	console.log(data)
-	var s = _callApi(data, 'booking/inventory', headerdata,2)
+	var s = _callApi(data, 'booking/inventory/lot', headerdata,2)
 	.then((response) => {
 		
 		if (response.status == 200) {
@@ -129,7 +129,7 @@ this.inventoryData=this.inventoryData.bind(this)
 				  <thead>
 					<tr>
 					  <th><div className="ct-head">
-						  <p>Vehicles</p>
+						  <p>Parking Lot</p>
 						  </div></th>
 						  <th><div className="ct-head">
 						  <p>Capacity</p>

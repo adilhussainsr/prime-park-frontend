@@ -465,6 +465,12 @@ class Dashboard extends Component {
 
                     <th>
                       <div class="ct-head">
+                        <p>Slot</p>
+                      </div>
+                    </th>
+
+                    <th>
+                      <div class="ct-head">
                         <p>Reservation ID</p>
                       </div>
                     </th>
@@ -507,6 +513,9 @@ class Dashboard extends Component {
                           </td>
                           <td>
                             <p>{item.id}</p>
+                          </td>
+                          <td className="no-line-break">
+                          {item?.parking?.slot || "-"}
                           </td>
                           <td>
                             <p>{item.reservation_id}</p>

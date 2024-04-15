@@ -20,8 +20,10 @@ class Revenue extends Component {
 			vendor_id: '',
 			message:'',
 			revenue_data: {},
+			revenue_data_carType: [],
 			user_id:'',
-			toggleName: "All"
+			toggleName: "All",
+			isCarTypeSelected:false
 		}
 		var headerdata = "";
 		var data = {};
@@ -51,9 +53,22 @@ vendor_id:"All",
 		event.preventDefault();
 		const { name, value } = event.target;
 		console.log(value+' '+name)
+		if (name == 'vendor_id' && value == "Self Check-in by App") {
+			this.setState({ [name]: value  }, () => {
+				setTimeout(() => this.carmovementDataForCarType(), 100);
+			  })
+			this.setState({
+			  isCarTypeSelected: true
+			});
+		  }
+		  else if(name== 'vendor_id'){
+			this.setState({
+				isCarTypeSelected: false
+			  });
+		  }
 		this.setState({ [name]: value })
 		console.log(this.state.user_id)
-		if(name=="user_id"){
+		if(name==="user_id"){
 			this.setState({ [name]: value  }, () => {
 				setTimeout(() => this.carmovementData(), 100);
 			  })
@@ -126,7 +141,40 @@ pom.click();
 	
 	
 	  }
+	  carmovementDataForCarType() {
+		var headerdata = "";
+		const startdate = moment(this.state.start_date).format('YYYY-MM-DD');
+		const enddate = moment(this.state.end_date).format('YYYY-MM-DD');
+
+		var data = { start_date: moment(startdate + " 00:00:00").toJSON(), 
+		end_date: moment(enddate + " 23:59:59").toJSON(), 
+		vendor_id: this.state.vendor_id,
+		user_id:this.state.user_id };
+		console.log(data)
+		var s = _callApi(data, 'booking/revenue/car', headerdata)
+			.then((response) => {
+				if (response.status === 200) {
+					if (response.data.status === 200) {
+						// console.log(response.data.revenue.vendor==='all')
+						var revenue_data = response.data.revenue;
+						console.log('====================================');
+						console.log(revenue_data);
+						console.log('====================================');
+						this.setState({
+							revenue_data_carType: revenue_data
+
+						})
+					}
+				}else{
 	
+					if (response.status === 400) {
+						this.setState({message:response.msg});
+					  }
+					
+					
+				}
+			})
+	}
 	carmovementData() {
 		var headerdata = "";
 		const startdate = moment(this.state.start_date).format('YYYY-MM-DD');
@@ -267,11 +315,11 @@ pom.click();
 						</div>
 					</div>
 					{this.state.toggleName == 'Cash' ?
-						<>
+					<>{!this.state.isCarTypeSelected ? 
+							<>
 							{this.state.revenue_data.length > 0 ?
 								this.state.revenue_data.map((item, i) => (
-									
-									this.state.vendor_id == item.vendor ?
+									this.state.vendor_id === item.vendor ?
 										<>
 
 											<div class="rr-table park-fees">
@@ -297,30 +345,6 @@ pom.click();
 
 														<tbody>
 
-															{
-
-
-																Object.keys(item.cash.parking_fee).map((key, j) => (
-																	<tr>
-																		{j == 0 ?
-																			<>
-																				<td rowspan={Object.keys(item.cash.parking_fee).length}><p>Parking Fee</p></td>
-																				<td><p>{key}</p></td>
-																				<td><p>{item.cash.parking_fee[key].no_of_cars}</p></td>
-																				<td><p>{item.cash.parking_fee[key].revenue}</p></td>
-
-																			</>
-																			:
-																			<>
-																				<td><p>{key}</p></td>
-																				<td><p>{item.cash.parking_fee[key].no_of_cars}</p></td>
-																				<td><p>{item.cash.parking_fee[key].revenue}</p></td>
-
-
-																			</>
-																		}
-																	</tr>
-																))}
 
 
 														</tbody>
@@ -328,7 +352,7 @@ pom.click();
 
 														<tfoot>
 															<tr>
-																<th><div class="ct-head">
+																{/* <th><div class="ct-head">
 																	<p>Type of Revenue</p>
 																</div></th>
 																<th><div class="ct-head">
@@ -339,7 +363,7 @@ pom.click();
 																</div></th>
 																<th  onClick={() => this.finalReport("parking")}><div class="ct-head">
 																<a class="hover">${item.cash.parking_fee_total.revenue}</a>
-																</div></th>
+																</div></th> */}
 
 															</tr>
 														</tfoot>
@@ -374,7 +398,7 @@ pom.click();
 																	<tr>
 																		{k == 0 ?
 																			<>
-																				<td rowspan={Object.keys(item.cash.extra_passenger_charges).length}><p>Extra Passenger Fees</p></td>
+																				<td rowSpan={Object.keys(item.cash.extra_passenger_charges).length}><p>Extra Passenger Fees</p></td>
 																				<td><p>{key}</p></td>
 																				<td><p>{item.cash.extra_passenger_charges[key].extra_passengers}</p></td>
 																				<td><p>{item.cash.extra_passenger_charges[key].revenue}</p></td>
@@ -442,7 +466,7 @@ pom.click();
 																	<tr>
 																		{k == 0 ?
 																			<>
-																				<td rowspan={Object.keys(item.cash.overstay_charges).length}><p>Overstay Charges</p></td>
+																				<td rowSpan={Object.keys(item.cash.overstay_charges).length}><p>Overstay Charges</p></td>
 																				<td><p>{key}</p></td>
 																				<td><p>{item.cash.overstay_charges[key].no_of_vehicles}</p></td>
 																				<td><p>{item.cash.overstay_charges[key].revenue}</p></td>
@@ -510,17 +534,186 @@ pom.click();
 										</> : '')) :
 								<>
 									<br />
-	No records found
-	<br />
+									No records found
+									<br />
 								</>
 							}
 						</> : ''}
+								 <>
+									{/* here */}
+
+										<>
+
+											<div class="rr-table park-fees">
+												<div class="dcb-table-responsive">
+													<table class="custom-table">
+													
+															<thead>
+															<tr>
+																<th><div class="ct-head">
+																	<p>Type of Car</p>
+																</div></th>
+																<th><div class="ct-head">
+																	<p>Booking Fee</p>
+																</div></th>
+																<th><div class="ct-head">
+																	<p>Parking Fee</p>
+																</div></th>
+																<th><div class="ct-head">
+																	<p>Passenger Fee</p>
+																</div></th>
+																<th><div class="ct-head">
+																	<p>Overstay Fee</p>
+																</div></th>
+																<th><div class="ct-head">
+																	<p>Oversize Fee</p>
+																</div></th>
+																<th><div class="ct-head">
+																	<p>Total Amount</p>
+																</div></th>
+																<th><div class="ct-head">
+																	<p>Received</p>
+																</div></th>
+																<th><div class="ct-head">
+																	<p>Due</p>
+																</div></th>
+
+														
+
+															</tr>
+														</thead>
+
+														<tbody>
+															{this.state.revenue_data_carType
+																.filter(item => this.state.vendor_id === item.vendor)
+																.map((carTypeData, index) => (
+																Object.keys(carTypeData.cash).map((carType) => (
+																	carType == 'total'? <></>
+																	: <React.Fragment key={`${index}-${carType}`}>
+																	<tr>
+																		<td>
+																		
+																			<p>{carType}</p>
+																		
+																		</td>
+																		<td>
+																	
+																			<p>{carTypeData.cash[carType].booking_fees}</p>
+																	
+																		</td>
+																		<td>
+																		
+																			<p>{carTypeData.cash[carType].parking_fee}</p>
+																		
+																		</td>
+																		<td>
+																		
+																			<p>{carTypeData.cash[carType].extra_passenger_charges}</p>
+																		
+																		</td>
+																		<td>
+																		
+																			<p>{carTypeData.cash[carType].overstay_charges}</p>
+																		
+																		</td>
+																		<td>
+																		
+																			<p>{carTypeData.cash[carType].oversize_charges}</p>
+																	
+																		</td>
+																		<td>
+																		
+																			<p>{carTypeData.cash[carType].total_amount}</p>
+																		
+																		</td>
+																		<td>
+																		
+																			<p>{carTypeData.cash[carType].recived}</p>
+																		
+																		</td>
+																		<td>
+																		
+																			<p>{carTypeData.cash[carType].due}</p>
+																
+																		</td>
+																	</tr>
+																	</React.Fragment>
+																))
+																))}
+															</tbody>
+														{this.state.revenue_data_carType
+																.filter(item => this.state.vendor_id === item.vendor)
+																.map((carTypeData, index) => (
+																Object.keys(carTypeData.cash).map((carType) => (
+																	carType !== 'total'? <></>:
+														<tfoot>
+															<tr>
+																<th><div class="ct-head">
+																	<p>Total Revenue</p>
+																</div></th>
+																<th><div class="ct-head">
+																<p>{carTypeData.cash[carType].booking_fees}</p>
+																</div></th>
+																<th>
+																<div class="ct-head">
+																			<p>{carTypeData.cash[carType].parking_fee}</p>
+																			</div>
+																		</th>
+																		<th>
+																		<div class="ct-head">
+																			<p>{carTypeData.cash[carType].extra_passenger_charges}</p>
+																			</div>
+																		</th>
+																		<th>
+																		<div class="ct-head">
+																			<p>{carTypeData.cash[carType].overstay_charges}</p>
+																			</div>
+																		</th>
+																		<th>
+																		<div class="ct-head">
+																			<p>{carTypeData.cash[carType].oversize_charges}</p>
+																			</div>
+																		</th>
+																		<th>
+																		<div class="ct-head">
+																			<p>{carTypeData.cash[carType].total_amount}</p>
+																		</div>
+																		</th>
+																		<th>
+																		<div class="ct-head">
+																			<p>{carTypeData.cash[carType].recived}</p>
+																		</div>
+																		</th>
+																		<th>
+																		<div class="ct-head">
+																			<p>{carTypeData.cash[carType].due}</p>
+																		</div>
+																		</th>
+															</tr>
+														</tfoot>
+																))))}
+													</table>
+												</div>
+											</div>
+											
+
+
+											
+										</> 
+
+
+									
+								 </>
+
+								 
+						</> : ''}
 
 					{this.state.toggleName == 'Card' ?
-						<>
+					<>{!this.state.isCarTypeSelected ? 
+							<>
 							{this.state.revenue_data.length > 0 ?
 								this.state.revenue_data.map((item, i) => (
-									this.state.vendor_id == item.vendor ?
+									this.state.vendor_id === item.vendor ?
 										<>
 
 											<div class="rr-table park-fees">
@@ -553,7 +746,7 @@ pom.click();
 																	<tr>
 																		{j == 0 ?
 																			<>
-																				<td rowspan={Object.keys(item.credit.parking_fee).length}><p>Parking Fee</p></td>
+																				<td rowSpan={Object.keys(item.credit.parking_fee).length}><p>Parking Fee</p></td>
 																				<td><p>{key}</p></td>
 																				<td><p>{item.credit.parking_fee[key].no_of_cars}</p></td>
 																				<td><p>{item.credit.parking_fee[key].revenue}</p></td>
@@ -623,7 +816,7 @@ pom.click();
 																	<tr>
 																		{k == 0 ?
 																			<>
-																				<td rowspan={Object.keys(item.credit.extra_passenger_charges).length}><p>Extra Passenger Fees</p></td>
+																				<td rowSpan={Object.keys(item.credit.extra_passenger_charges).length}><p>Extra Passenger Fees</p></td>
 																				<td><p>{key}</p></td>
 																				<td><p>{item.credit.extra_passenger_charges[key].extra_passengers}</p></td>
 																				<td><p>{item.credit.extra_passenger_charges[key].revenue}</p></td>
@@ -691,7 +884,7 @@ pom.click();
 																	<tr>
 																		{k == 0 ?
 																			<>
-																				<td rowspan={Object.keys(item.credit.overstay_charges).length}><p>Overstay Charges</p></td>
+																				<td rowSpan={Object.keys(item.credit.overstay_charges).length}><p>Overstay Charges</p></td>
 																				<td><p>{key}</p></td>
 																				<td><p>{item.credit.overstay_charges[key].no_of_vehicles}</p></td>
 																				<td><p>{item.credit.overstay_charges[key].revenue}</p></td>
@@ -782,15 +975,185 @@ pom.click();
 											</div>
 										</> : '')) : <>
 									<br />
-	No records found
-	<br />
+								No records found
+								<br />
 								</>}
+								</>
+								 : 
+								 <>
+									{/* here */}
+
+										<>
+
+											<div class="rr-table park-fees">
+												<div class="dcb-table-responsive">
+													<table class="custom-table">
+													
+															<thead>
+															<tr>
+																<th><div class="ct-head">
+																	<p>Type of Car</p>
+																</div></th>
+																<th><div class="ct-head">
+																	<p>Booking Fee</p>
+																</div></th>
+																<th><div class="ct-head">
+																	<p>Parking Fee</p>
+																</div></th>
+																<th><div class="ct-head">
+																	<p>Passenger Fee</p>
+																</div></th>
+																<th><div class="ct-head">
+																	<p>Overstay Fee</p>
+																</div></th>
+																<th><div class="ct-head">
+																	<p>Oversize Fee</p>
+																</div></th>
+																<th><div class="ct-head">
+																	<p>Total Amount</p>
+																</div></th>
+																<th><div class="ct-head">
+																	<p>Received</p>
+																</div></th>
+																<th><div class="ct-head">
+																	<p>Due</p>
+																</div></th>
+
+														
+
+															</tr>
+														</thead>
+
+														<tbody>
+															{this.state.revenue_data_carType
+																.filter(item => this.state.vendor_id === item.vendor)
+																.map((carTypeData, index) => (
+																Object.keys(carTypeData.credit).map((carType) => (
+																	carType == 'total'? <></>
+																	: <React.Fragment key={`${index}-${carType}`}>
+																	<tr>
+																		<td>
+																		
+																			<p>{carType}</p>
+																		
+																		</td>
+																		<td>
+																	
+																			<p>{carTypeData.credit[carType].booking_fees}</p>
+																	
+																		</td>
+																		<td>
+																		
+																			<p>{carTypeData.credit[carType].parking_fee}</p>
+																		
+																		</td>
+																		<td>
+																		
+																			<p>{carTypeData.credit[carType].extra_passenger_charges}</p>
+																		
+																		</td>
+																		<td>
+																		
+																			<p>{carTypeData.credit[carType].overstay_charges}</p>
+																		
+																		</td>
+																		<td>
+																		
+																			<p>{carTypeData.credit[carType].oversize_charges}</p>
+																	
+																		</td>
+																		<td>
+																		
+																			<p>{carTypeData.credit[carType].total_amount}</p>
+																		
+																		</td>
+																		<td>
+																		
+																			<p>{carTypeData.credit[carType].recived}</p>
+																		
+																		</td>
+																		<td>
+																		
+																			<p>{carTypeData.credit[carType].due}</p>
+																
+																		</td>
+																	</tr>
+																	</React.Fragment>
+																))
+																))}
+															</tbody>
+														{this.state.revenue_data_carType
+																.filter(item => this.state.vendor_id === item.vendor)
+																.map((carTypeData, index) => (
+																Object.keys(carTypeData.credit).map((carType) => (
+																	carType !== 'total'? <></>:
+														<tfoot>
+															<tr>
+																<th><div class="ct-head">
+																	<p>Total Revenue</p>
+																</div></th>
+																<th><div class="ct-head">
+																<p>{carTypeData.credit[carType].booking_fees}</p>
+																</div></th>
+																<th>
+																<div class="ct-head">
+																			<p>{carTypeData.credit[carType].parking_fee}</p>
+																			</div>
+																		</th>
+																		<th>
+																		<div class="ct-head">
+																			<p>{carTypeData.credit[carType].extra_passenger_charges}</p>
+																			</div>
+																		</th>
+																		<th>
+																		<div class="ct-head">
+																			<p>{carTypeData.credit[carType].overstay_charges}</p>
+																			</div>
+																		</th>
+																		<th>
+																		<div class="ct-head">
+																			<p>{carTypeData.credit[carType].oversize_charges}</p>
+																			</div>
+																		</th>
+																		<th>
+																		<div class="ct-head">
+																			<p>{carTypeData.credit[carType].total_amount}</p>
+																		</div>
+																		</th>
+																		<th>
+																		<div class="ct-head">
+																			<p>{carTypeData.credit[carType].recived}</p>
+																		</div>
+																		</th>
+																		<th>
+																		<div class="ct-head">
+																			<p>{carTypeData.credit[carType].due}</p>
+																		</div>
+																		</th>
+															</tr>
+														</tfoot>
+																))))}
+													</table>
+												</div>
+											</div>
+											
+
+
+											
+										</> 
+
+
+									
+								 </>
+
+								 }
 						</> : ''}
 					{this.state.toggleName == 'All' ?
-						<>
+						<>{!this.state.isCarTypeSelected ? 
+							<>
 							{this.state.revenue_data.length > 0 ?
 								this.state.revenue_data.map((item, i) => (
-									this.state.vendor_id == item.vendor ?
+									this.state.vendor_id === item.vendor ?
 										<>
 
 											<div class="rr-table park-fees">
@@ -823,7 +1186,7 @@ pom.click();
 																	<tr>
 																		{j == 0 ?
 																			<>
-																				<td rowspan={Object.keys(item.all.parking_fee).length}><p>Parking Fee</p></td>
+																				<td rowSpan={Object.keys(item.all.parking_fee).length}><p>Parking Fee</p></td>
 																				<td><p>{key}</p></td>
 																				<td><p>{item.all.parking_fee[key].no_of_cars}</p></td>
 																				<td><p>{item.all.parking_fee[key].revenue}</p></td>
@@ -894,7 +1257,7 @@ pom.click();
 																		{k == 0 ?
 																			<>
 																		
-																				<td rowspan={Object.keys(item.all.extra_passenger_charges).length}><p>Extra Passenger Fees</p></td>
+																				<td rowSpan={Object.keys(item.all.extra_passenger_charges).length}><p>Extra Passenger Fees</p></td>
 																				<td><p>{key}</p></td>
 																				<td><p>{item.all.extra_passenger_charges[key].extra_passengers}</p></td>
 																				<td><p>{item.all.extra_passenger_charges[key].revenue}</p></td>
@@ -962,7 +1325,7 @@ pom.click();
 																	<tr>
 																		{k == 0 ?
 																			<>
-																				<td rowspan={Object.keys(item.all.overstay_charges).length}><p>Overstay Charges</p></td>
+																				<td rowSpan={Object.keys(item.all.overstay_charges).length}><p>Overstay Charges</p></td>
 																				<td><p>{key}</p></td>
 																				<td><p>{item.all.overstay_charges[key].no_of_vehicles}</p></td>
 																				<td><p>{item.all.overstay_charges[key].revenue}</p></td>
@@ -1057,9 +1420,178 @@ pom.click();
 											</div>
 										</> : '')) : <>
 									<br />
-	No records found
-	<br />
+									No records found
+									<br />
 								</>}
+								</>
+								 : 
+								 <>
+									{/* here */}
+
+										<>
+
+											<div class="rr-table park-fees">
+												<div class="dcb-table-responsive">
+													<table class="custom-table">
+													
+															<thead>
+															<tr>
+																<th><div class="ct-head">
+																	<p>Type of Car</p>
+																</div></th>
+																<th><div class="ct-head">
+																	<p>Booking Fee</p>
+																</div></th>
+																<th><div class="ct-head">
+																	<p>Parking Fee</p>
+																</div></th>
+																<th><div class="ct-head">
+																	<p>Passenger Fee</p>
+																</div></th>
+																<th><div class="ct-head">
+																	<p>Overstay Fee</p>
+																</div></th>
+																<th><div class="ct-head">
+																	<p>Oversize Fee</p>
+																</div></th>
+																<th><div class="ct-head">
+																	<p>Total Amount</p>
+																</div></th>
+																<th><div class="ct-head">
+																	<p>Received</p>
+																</div></th>
+																<th><div class="ct-head">
+																	<p>Due</p>
+																</div></th>
+
+														
+
+															</tr>
+														</thead>
+
+														<tbody>
+															{this.state.revenue_data_carType
+																.filter(item => this.state.vendor_id === item.vendor)
+																.map((carTypeData, index) => (
+																Object.keys(carTypeData.all).map((carType) => (
+																	carType == 'total'? <></>
+																	: <React.Fragment key={`${index}-${carType}`}>
+																	<tr>
+																		<td>
+																		
+																			<p>{carType}</p>
+																		
+																		</td>
+																		<td>
+																	
+																			<p>{carTypeData.all[carType].booking_fees}</p>
+																	
+																		</td>
+																		<td>
+																		
+																			<p>{carTypeData.all[carType].parking_fee}</p>
+																		
+																		</td>
+																		<td>
+																		
+																			<p>{carTypeData.all[carType].extra_passenger_charges}</p>
+																		
+																		</td>
+																		<td>
+																		
+																			<p>{carTypeData.all[carType].overstay_charges}</p>
+																		
+																		</td>
+																		<td>
+																		
+																			<p>{carTypeData.all[carType].oversize_charges}</p>
+																	
+																		</td>
+																		<td>
+																		
+																			<p>{carTypeData.all[carType].total_amount}</p>
+																		
+																		</td>
+																		<td>
+																		
+																			<p>{carTypeData.all[carType].recived}</p>
+																		
+																		</td>
+																		<td>
+																		
+																			<p>{carTypeData.all[carType].due}</p>
+																
+																		</td>
+																	</tr>
+																	</React.Fragment>
+																))
+																))}
+															</tbody>
+														{this.state.revenue_data_carType
+																.filter(item => this.state.vendor_id === item.vendor)
+																.map((carTypeData, index) => (
+																Object.keys(carTypeData.all).map((carType) => (
+																	carType !== 'total'? <></>:
+														<tfoot>
+															<tr>
+																<th><div class="ct-head">
+																	<p>Total Revenue</p>
+																</div></th>
+																<th><div class="ct-head">
+																<p>{carTypeData.all[carType].booking_fees}</p>
+																</div></th>
+																<th>
+																<div class="ct-head">
+																			<p>{carTypeData.all[carType].parking_fee}</p>
+																			</div>
+																		</th>
+																		<th>
+																		<div class="ct-head">
+																			<p>{carTypeData.all[carType].extra_passenger_charges}</p>
+																			</div>
+																		</th>
+																		<th>
+																		<div class="ct-head">
+																			<p>{carTypeData.all[carType].overstay_charges}</p>
+																			</div>
+																		</th>
+																		<th>
+																		<div class="ct-head">
+																			<p>{carTypeData.all[carType].oversize_charges}</p>
+																			</div>
+																		</th>
+																		<th>
+																		<div class="ct-head">
+																			<p>{carTypeData.all[carType].total_amount}</p>
+																		</div>
+																		</th>
+																		<th>
+																		<div class="ct-head">
+																			<p>{carTypeData.all[carType].recived}</p>
+																		</div>
+																		</th>
+																		<th>
+																		<div class="ct-head">
+																			<p>{carTypeData.all[carType].due}</p>
+																		</div>
+																		</th>
+															</tr>
+														</tfoot>
+																))))}
+													</table>
+												</div>
+											</div>
+											
+
+
+											
+										</> 
+
+
+									
+								 </>
+
+								 }
 						</> : ''}
 						</div>
 			</div>

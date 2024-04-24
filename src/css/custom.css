@@ -2767,10 +2767,16 @@ span[class*="ion-"] {
 	width: calc((100% / 6) - 8px);
 }
 .lot-d .ldc-body .lot-box{
-	-webkit-box-flex: calc((100% / 5) - 8px);
-	    -ms-flex: calc((100% / 5) - 8px) 0 0px;
-	        flex: calc((100% / 5) - 8px) 0 0;
-	width: calc((100% / 5) - 8px);
+	-webkit-box-flex: calc((100% / 4) - 8px);
+	    -ms-flex: calc((100% / 4) - 8px) 0 0px;
+	        flex: calc((100% / 4) - 8px) 0 0;
+	width: calc((100% / 4) - 8px);
+}
+.lot-g .ldc-body .lot-box{
+	-webkit-box-flex: calc((100% / 2) - 8px);
+	    -ms-flex: calc((100% / 2) - 8px) 0 0px;
+	        flex: calc((100% / 2) - 8px) 0 0;
+	width: calc((100% / 2) - 8px);
 }
 .lot-e .ldc-body .lot-box{
 	-webkit-box-flex: calc((100% / 3) - 8px);
@@ -2784,6 +2790,13 @@ span[class*="ion-"] {
 	        flex: calc((100% / 2) - 8px) 0 0;
 	width: calc((100% / 2) - 8px);
 }
+.lot-h .ldc-body .lot-box{
+	-webkit-box-flex: calc((100% / 2) - 8px);
+	    -ms-flex: calc((100% / 2) - 8px) 0 0px;
+	        flex: calc((100% / 2) - 8px) 0 0;
+	width: calc((100% / 2) - 8px);
+}
+
 .lot-e-12 .ldc-body .lot-box{
 	-webkit-box-flex: calc((100% / 1) - 8px);
 	    -ms-flex: calc((100% / 1) - 8px) 0 0px;

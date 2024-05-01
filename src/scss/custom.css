@@ -1264,6 +1264,8 @@ span[class*="ion-"] {
 	flex: calc(100% - 252px) 0 0;
 	padding: 40px 65px;
 	width: calc(100% - 252px);
+		/* page-break-after: always; */
+		height: 100%;
 }
 .ds-list {
 	scrollbar-color: #eee #ddd;
@@ -4591,6 +4593,9 @@ color: #192029;
 }
 .dashboard-content {
 	padding: 40px 45px;
+	width: 100%;
+		/* page-break-after: always; */
+		height: 100%;
 }
 .splash-slider-wrap {
 	padding: 60px 45px;
@@ -4686,6 +4691,9 @@ color: #192029;
 }
 .dashboard-content {
 	flex: 100% 0 0;
+	width: 100%;
+		/* page-break-after: always; */
+		height: 100%;
 }
 .splash-slider-wrap {
 	max-height: 710px;
@@ -4763,6 +4771,9 @@ color: #192029;
 }
 .dashboard-content {
 	padding: 30px 20px;
+	width: 100%;
+		/* page-break-after: always; */
+		height: 100%;
 }
 .splash-down {
 	position: absolute;
@@ -4926,6 +4937,9 @@ color: #192029;
 }
 .dashboard-content {
 	padding: 20px 15px;
+	width: 100%;
+		/* page-break-after: always; */
+		height: 100%;
 }
 .dhu-name {
 	max-width: 56px;
@@ -5124,7 +5138,7 @@ color: #192029;
 }
 .updated .cr-left p,.updated .cr-left small, .updated .cr-right h4 {
     color: #303030;
-    font-size: 15px;
+    font-size: 10px;
     font-weight: 600;
 }
 .updated .cpanel-footer .cpanel-row.cp-bg {

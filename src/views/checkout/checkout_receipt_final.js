@@ -286,7 +286,7 @@ class CheckoutReceiptFinal extends Component {
                         </div>
                       </div>
                     </div>
-                    <div class="card-right card-w-40">
+                    <div class="card-right card-w-30">
                       <div className="sc-bg-white">
                         <div className="cpanel-header">
                           <h4>Billing Details</h4>
@@ -661,7 +661,7 @@ class CheckoutReceiptFinal extends Component {
                       </div>
                     </div>
                   </div>
-                  <div class="card-right card-w-40">
+                  <div class="card-right card-w-30">
                     <div className="sc-bg-white">
                       <div className="cpanel-header">
                         <h4>Billing Details</h4>

@@ -187,7 +187,7 @@ class CheckoutReceipt extends Component {
                     <h4 class="sub-card-head">Office's Receipt</h4>
                   </div>
                   <div class="card-by-card">
-                    <div class="card-left card-w-70" >
+                    <div class="card-left card-w-60 mr-1" >
                       <div class="sc-bg-white">
                         <div class="card-header">
                           <h4>Prime Park Receipt</h4>
@@ -224,7 +224,7 @@ class CheckoutReceipt extends Component {
                         </div>
                         <div class="card-body">
                           <div class="card-summary">
-                            <div class="card-sum-box card-w-50">
+                            <div class="card-sum-box-left card-w-50">
                               <p>Name</p>
                               <h4>
                                 {this.state.receiptData.customer_name
@@ -232,7 +232,7 @@ class CheckoutReceipt extends Component {
                                   : "NA"}
                               </h4>
                             </div>
-                            <div class="card-sum-box card-w-50">
+                            <div class="card-sum-box-left card-w-50">
                               <p>Passenger</p>
                               <h4>
                                 {this.state.receiptData.passengers
@@ -240,7 +240,7 @@ class CheckoutReceipt extends Component {
                                   : "NA"}
                               </h4>
                             </div>
-                            <div class="card-sum-box card-w-50">
+                            <div class="card-sum-box-left card-w-50">
                               <p>Phone number</p>
                               <h4>
                                 {this.state.receiptData &&
@@ -249,7 +249,7 @@ class CheckoutReceipt extends Component {
                                   : "NA"}
                               </h4>
                             </div>
-                            <div class="card-sum-box card-w-50">
+                            <div class="card-sum-box-left card-w-50">
                               <p>Ticket ID</p>
                               <h4>
                                 {this.state.receiptData &&
@@ -258,7 +258,7 @@ class CheckoutReceipt extends Component {
                                   : "NA"}
                               </h4>
                             </div>
-                            <div class="card-sum-box card-w-50">
+                            <div class="card-sum-box-left card-w-50">
                               <p>Plate number</p>
                               <h4>
                                 {this.state.receiptData.plate_number
@@ -266,14 +266,14 @@ class CheckoutReceipt extends Component {
                                   : "NA"}
                               </h4>
                             </div>
-                            <div class="card-sum-box card-w-50">
+                            <div class="card-sum-box-left card-w-50">
                               <p>Payment</p>
                               <h4>
                               {this.state.receiptData.payment_mode
                                   ? this.state.receiptData.payment_mode
                                   : "NA"}</h4>
                             </div>
-                            <div class="card-sum-box card-w-50">
+                            <div class="card-sum-box-left card-w-50">
                               <p>Slot Number</p>
                               <h4>
                                 {this.state.receiptData.parking &&
@@ -282,7 +282,7 @@ class CheckoutReceipt extends Component {
                                   : "NA"}
                               </h4>
                             </div>
-                            <div class="card-sum-box card-w-50">
+                            <div class="card-sum-box-left card-w-50">
                               <p>Amount Paid</p>
                               <h4>
                                 ${" "}
@@ -296,7 +296,7 @@ class CheckoutReceipt extends Component {
                         </div>
                       </div>
                     </div>
-                    <div className="card-right card-w-40">
+                    <div className="card-right card-w-50">
                       <div className="sc-bg-white">
                         <div className="cpanel-header">
                           <h4>Billing Details</h4>
@@ -518,24 +518,26 @@ class CheckoutReceipt extends Component {
                           I accept the Terms & Conditions
                         </p>
                       </div>
-                    </div>
-                    <div class="tcf-right">
                       <div class="sign-field">
-                        <h3>Customer's Signature _________ </h3>
+                        <h3>Customer's Signature ______________________ </h3>
                       </div>
                     </div>
+                    
                   </div>
+                  <div class="tcf-right">
+                      {/* <div class="sign-field">
+                        <h3>Customer's Signature ______________________ </h3>
+                      </div> */}
+                    </div>
                 </div>
               </div>
 
               <div class="col30">
                 <div class="dc-header">
-                  <div class="dch-left">
                     <h3 class="dc-head">Customer's Receipt</h3>
-                  </div>
                 </div>
                 <div class="card-by-card">
-                  <div class="card-left card-w-60">
+                  <div class="card-left card-w-60 mr-1">
                     <div class="sc-bg-white">
                       <div class="card-header">
                         <h4>Prime Park Receipt</h4>
@@ -568,9 +570,9 @@ class CheckoutReceipt extends Component {
                           </div>
                         </div>
                       </div>
-                      <div class="card-body">
-                        <div class="card-summary">
-                          <div class="card-sum-box ">
+                      <div class="card-body h-230">
+                        <div class="card-summary-right">
+                          <div class="card-sum-box card-w-50">
                             <p>Name</p>
                             <h4>
                               {this.state.receiptData.customer_name
@@ -578,7 +580,7 @@ class CheckoutReceipt extends Component {
                                 : "NA"}
                             </h4>
                           </div>
-                          <div class="card-sum-box ">
+                          <div class="card-sum-box card-w-50">
                             <p>Vendor</p>
                             <h4>
                               {this.state.receiptData.vendor &&
@@ -587,7 +589,7 @@ class CheckoutReceipt extends Component {
                                 : "NA"}
                             </h4>
                           </div>
-                          <div class="card-sum-box ">
+                          <div class="card-sum-box card-w-50">
                             <p>Passenger</p>
                             <h4>
                               {this.state.receiptData.passengers
@@ -595,7 +597,7 @@ class CheckoutReceipt extends Component {
                                 : "NA"}
                             </h4>
                           </div>
-                          <div class="card-sum-box ">
+                          <div class="card-sum-box card-w-50">
                             <p>Phone number</p>
                             <h4>
                               {this.state.receiptData &&
@@ -604,7 +606,7 @@ class CheckoutReceipt extends Component {
                                 : "NA"}
                             </h4>
                           </div>
-                          <div class="card-sum-box ">
+                          <div class="card-sum-box card-w-50">
                             <p>Reservation ID</p>
                             <h4>
                               {this.state.receiptData.reservation_id
@@ -612,7 +614,7 @@ class CheckoutReceipt extends Component {
                                 : "NA"}
                             </h4>
                           </div>
-                          <div class="card-sum-box ">
+                          <div class="card-sum-box card-w-50">
                             <p>Plate number</p>
                             <h4>
                               {this.state.receiptData.plate_number
@@ -620,7 +622,7 @@ class CheckoutReceipt extends Component {
                                 : "NA"}
                             </h4>
                           </div>
-                          <div class="card-sum-box ">
+                          <div class="card-sum-box card-w-50">
                             <p>Ticket ID</p>
                             <h4>
                               {this.state.receiptData &&
@@ -629,7 +631,7 @@ class CheckoutReceipt extends Component {
                                 : "NA"}
                             </h4>
                           </div>
-                          <div class="card-sum-box ">
+                          <div class="card-sum-box card-w-50">
                             <p>Slot Number</p>
                             <h4>
                               {this.state.receiptData.parking &&
@@ -638,7 +640,7 @@ class CheckoutReceipt extends Component {
                                 : "NA"}
                             </h4>
                           </div>
-                          <div class="card-sum-box ">
+                          <div class="card-sum-box card-w-50">
                             <p>Payment</p>
                             <h4>Cash</h4>
                           </div>
@@ -646,7 +648,7 @@ class CheckoutReceipt extends Component {
                       </div>
                       <div class="card-footer">
                         <div class="card-summary">
-                          <div class="card-sum-box ">
+                          <div class="card-sum-box card-w-50">
                             <p>Check-In Time</p>
                             <h4>
                               {this.state.receiptData &&
@@ -657,7 +659,7 @@ class CheckoutReceipt extends Component {
                                 : "NA"}
                             </h4>
                           </div>
-                          <div class="card-sum-box">
+                          <div class="card-sum-box card-w-50">
                             <p>Check-Out Time</p>
                             <h4>
                               {this.state.receiptData &&
@@ -672,7 +674,7 @@ class CheckoutReceipt extends Component {
                       </div>
                     </div>
                   </div>
-                  <div className="card-right card-w-40">
+                  <div className="card-right card-w-50">
                     <div className="sc-bg-white">
                       <div className="cpanel-header">
                         <h4>Billing Details</h4>
@@ -834,14 +836,7 @@ class CheckoutReceipt extends Component {
                           </div>
                         </div>
                       </div>
-                      <div style={{ textAlign: "center", margin: '10px' }}>
-                        <QRCode
-                          size={"64"}
-                          value={
-                            "http://ec2-44-201-80-160.compute-1.amazonaws.com/#/search"
-                          }
-                        />
-                      </div>
+                    
                     </div>
                   </div>
                 </div>
@@ -888,7 +883,7 @@ class CheckoutReceipt extends Component {
                         drop-off and also agree that no damage claim can be
                         filed without providing those pictures.
                       </li>
-                      <li>
+                      {/* <li>
                         <strong>6.</strong>Customer must leave the car key to
                         the attendant and agree that failure to do so may result
                         to towing fees from $75 to $150.
@@ -896,10 +891,10 @@ class CheckoutReceipt extends Component {
                       <li>
                         <strong>7.</strong>Customer agree that all balance must
                         be paid in full prior to retrieval of vehicle.
-                      </li>
+                      </li> */}
                     </ul>
                   </div>
-                  <div class="tc-footer">
+                  {/* <div class="tc-footer">
                     <div class="tcf-left">
                       <div class="check-condition active">
                         <span class="check-mark">
@@ -915,8 +910,16 @@ class CheckoutReceipt extends Component {
                         <h3>Customer's Signature _________ </h3>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
+                <div style={{ textAlign: "center", margin: '10px' ,background: 'white', padding: '10px'}}>
+                        <QRCode
+                          size={"64"}
+                          value={
+                            "http://ec2-44-201-80-160.compute-1.amazonaws.com/#/search"
+                          }
+                        />
+                      </div>
               </div>
 
               {this.state.vechile_receipt ? (
@@ -1088,7 +1091,7 @@ class CheckoutReceipt extends Component {
                   <h4 class="sub-card-head">Vehicle's Receipt</h4>
                 </div>
                 <div class="card-by-card slot-card">
-                  <div class="card-left">
+                  <div class="card-left mr-1">
                     <div class="sc-bg-white">
                       <div class="card-header">
                         <h4>Prime Park JFK</h4>
@@ -1098,15 +1101,12 @@ class CheckoutReceipt extends Component {
                             <p>+918298738900</p>
                           </div>
                         </div>
-                      </div>
-                      <div class="card-body">
-                        <div class="card-data ">
-                          <div class="reserve-data">
-                            <p class="light">Reservation ID
-                            </p><h4 class="bold">{this.state.receiptData.reservation_id
-                                ? this.state.receiptData.reservation_id
-                                : "NA"}<p></p>
-                          </h4></div>
+                        <div class="reserve-data">
+                            <h4 class="bold">{this.state.receiptData.parking &&
+                            this.state.receiptData.parking.display_slot
+                              ? this.state.receiptData.parking.display_slot
+                              : "NA"}</h4>
+                          </div>
                           <div class="reserve-data">
                             <p class="light">Pickup : Date
                             </p><h4 class="bold">{this.state.receiptData.parking &&
@@ -1115,13 +1115,20 @@ class CheckoutReceipt extends Component {
                                     this.state.receiptData.pick_up_time
                                   ).format("MM/DD/YYYY")
                                 : "NA"}<p></p>
-                          </h4></div>
-                          <div class="reserve-data">
+                          </h4>
+                        </div>
+                      </div>
+                      
+                      <div class="card-body ">
+                        <div class="card-data ">
+                        
+                        
+                          {/* <div class="reserve-data">
                             <h4 class="bold">{this.state.receiptData.parking &&
                             this.state.receiptData.parking.display_slot
                               ? this.state.receiptData.parking.display_slot
                               : "NA"}</h4>
-                          </div>
+                          </div> */}
                         </div>
                         <div class="card-data">
                           <div class="card-block">
@@ -1138,6 +1145,13 @@ class CheckoutReceipt extends Component {
                                   : "NA"}</h4>										
                           </div>
                           <div class="card-block">
+                            <p>Passenger</p>
+                            <h4>{this.state.receiptData.parking &&
+                              this.state.receiptData.passengers
+                                ? this.state.receiptData.passengers
+                                : "NA"}</h4>											
+                          </div>
+                          <div class="card-block">
                             <p>Date : From</p>
                             <h4>{this.state.receiptData.parking &&
                               this.state.receiptData.reservation_time
@@ -1146,13 +1160,7 @@ class CheckoutReceipt extends Component {
                                   ).format("MM/DD/YYYY")
                                 : "NA"}</h4>											
                           </div>
-                          <div class="card-block">
-                            <p>Passenger</p>
-                            <h4>{this.state.receiptData.parking &&
-                              this.state.receiptData.passengers
-                                ? this.state.receiptData.passengers
-                                : "NA"}</h4>											
-                          </div>
+                          
                           <div class="card-block">
                             <p>Phone Number</p>
                             <h4>{this.state.receiptData &&
@@ -1161,6 +1169,12 @@ class CheckoutReceipt extends Component {
                                 : "NA"}</h4>											
                           </div>
                         </div>
+                        <div class="reserve-data">
+                            <p class="light">Reservation ID
+                            </p><h4 class="bold">{this.state.receiptData.reservation_id
+                                ? this.state.receiptData.reservation_id
+                                : "NA"}<p></p>
+                          </h4></div>
                       </div>
                     </div>
                   </div>

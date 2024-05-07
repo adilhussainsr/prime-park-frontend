@@ -665,11 +665,15 @@ span[class*="ion-"] {
 		/* page-break-after: always; */
 		/* height: 100px; */
 }
+.vertical-dashed-line {
+	border-left: 1px dashed #000; /* Adjust thickness and color as needed */
+	height: auto; /* Adjust height as needed */
+  }
 .dc-wrap{
 	padding: 80px;
 }
 .dc-wrap-0{
-	padding: 65px 30px 0px 20px;
+	padding: 65px 30px 28px 43px;
 }
 .ds-list {
 	scrollbar-color: #eee #ddd;
@@ -1600,6 +1604,7 @@ span[class*="ion-"] {
 	display: -ms-flexbox;
 	display: flex;
 	margin: 0 5px;
+	height: 395px;
 }
 .card-left, .card-right{
 	padding: 0 10px;
@@ -2070,7 +2075,13 @@ span[class*="ion-"] {
 }
 .tc-body{
 	margin-top: 15px;
+	font-size: 10px;
+	max-height: 235px;
 }
+.tc-body h1{
+	display: none;
+}
+
 .tc-body ul{
 	list-style: none;
 	margin: 0;
@@ -2098,7 +2109,7 @@ span[class*="ion-"] {
 	        justify-content: space-between;
 }
 .sign-field{
-	margin-top: 3px;
+	margin-top: 25px;
 }
 .sign-field h3{
 	font-size: 22px;
@@ -4033,7 +4044,7 @@ a.hover:hover
 }
 .col30{
     flex: 33.33% 0 0;
-	padding: 0px 5px;
+	padding: 0px 13px 0px 13px;
 }
 .col60{
     width: 60%;
@@ -4074,11 +4085,23 @@ a.hover:hover
 	}
 	.dashboard-header, .dashboard-sidebar, .dch-right{display: none;}
 	.dashboard-content {
-		margin-top: 0px;
+		margin-top: -20px;
 		margin-left: 0px;
 		width: 100%;
 		/* page-break-after: always; */
 		height: 100vh;
+	}
+	.check-in-receipt {
+		padding-top: 0px;
+	}
+	.cpanel-footer {
+		margin-top: 80px;
+	}
+	.cpanel-row{
+		padding: 30px 30px;
+	}
+	.updated .cpanel-row{
+		padding: 60px 0px 60px;
 	}
 	.dc-wrap{padding: 15px;}
 	.dc-head, .sub-card-head, .updated .tc-head, .updated .card-header h4{font-size: 15px;}
@@ -4174,11 +4197,23 @@ a.hover:hover
 		min-height: 70px;
 		padding: 0px 3px;
 		line-height: 28px;
-		margin: 0px 18px 16px 13px;
+		margin: 0px 10px 23px 0px;
 	} 
-	  .reserve-data p.light{font-size: 18px;color: #9d9d9d;letter-spacing: 3px;}  
-	  .reserve-data h4.bold{font-size: 20px;margin-top: 12px;letter-spacing: 3px;}
+	  .reserve-data p.light{font-size: 23px;color: #9d9d9d;letter-spacing: 3px;}  
+	  .reserve-data h4.bold{font-size: 29px;margin-top: 12px;letter-spacing: 3px;}
 
+	  .reserve-data-upper {
+		border: 1px solid #000;
+		border-radius: 4px;
+		flex-basis: 100%;
+		text-align: center;
+		min-height: 85px;
+		padding: 9px 0px 0px 0px;
+		line-height: 28px;
+		margin: 2px 40px 16px 40px;
+	} 
+	  .reserve-data-upper p.light{font-size: 23px !important; color: #9d9d9d;letter-spacing: 3px;}  
+	  .reserve-data-upper h4.bold{font-size: 30px;margin-top: 12px;letter-spacing: 3px;}
 
 	  .margintop710px{margin-top: 110px;}
 	  .marginrTop300px{margin-top: 340px;}

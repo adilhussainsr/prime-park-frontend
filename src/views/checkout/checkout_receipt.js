@@ -24,6 +24,7 @@ class CheckoutReceipt extends Component {
       vechile_receipt: true,
       days: 0,
       type: "All",
+      PrivacyPolicy:'',
     };
     var headerdata = "";
     var data = {};
@@ -45,6 +46,17 @@ class CheckoutReceipt extends Component {
       }
     });
     this.PoliciesData();
+    var s = _callApi(data, 'parking/privacypolicy', headerdata)
+	.then((response) => {
+		if (response.status == 200) {
+			if (response.data.status === 200) {
+			  console.log(response.data.data)
+			  this.setState({toggle:false})
+			  this.PoliciesData();
+			
+			}
+		}
+	})
   }
 
   componentDidMount() {
@@ -470,43 +482,7 @@ class CheckoutReceipt extends Component {
                     <h4 class="tc-head">Terms & Conditions</h4>
                   </div>
                   <div class="tc-body">
-                    <ul>
-                      <li>
-                        <strong>1.</strong>Your reservation will be subject to
-                        Parking hourly and daily rate as soon as the voucher is
-                        expired. The hourly rate is 10/hour and the daily rate
-                        is $15 for small cars and $18 for SUV/ Trucks per day.
-                      </li>
-                      <li>
-                        <strong>2.</strong>This facility does NOT allow in/out
-                        privileges. You CANNOT enter & exit more than once.
-                      </li>
-                      <li>
-                        <strong>3.</strong>For all Canceled online
-                        vouchers/Reservation customers are required to pay for
-                        one day of parking and a $10 service fee.
-                      </li>
-                      <li>
-                        <strong>4.</strong>This facility does not allow online
-                        reservation extensions. Additional time must be paid
-                        on-site at a regular rate.
-                      </li>
-                      <li>
-                        <strong>5.</strong>Customer is required to take pictures
-                        of their vehicles (all sides) at the location during
-                        drop-off and also agree that no damage claim can be
-                        filed without providing those pictures.
-                      </li>
-                      <li>
-                        <strong>6.</strong>Customer must leave the car key to
-                        the attendant and agree that failure to do so may result
-                        to towing fees from $75 to $150.
-                      </li>
-                      <li>
-                        <strong>7.</strong>Customer agree that all balance must
-                        be paid in full prior to retrieval of vehicle.
-                      </li>
-                    </ul>
+                  <span dangerouslySetInnerHTML={this.rawMarkup()} />
                   </div>
                   <div class="tc-footer">
                     <div class="tcf-left">
@@ -518,21 +494,19 @@ class CheckoutReceipt extends Component {
                           I accept the Terms & Conditions
                         </p>
                       </div>
-                      <div class="sign-field">
-                        <h3>Customer's Signature ______________________ </h3>
-                      </div>
+                    
                     </div>
                     
                   </div>
                   <div class="tcf-right">
-                      {/* <div class="sign-field">
+                      <div class="sign-field">
                         <h3>Customer's Signature ______________________ </h3>
-                      </div> */}
+                      </div>
                     </div>
                 </div>
               </div>
 
-              <div class="col30">
+              <div class="col30 vertical-dashed-line">
                 <div class="dc-header">
                     <h3 class="dc-head">Customer's Receipt</h3>
                 </div>
@@ -856,32 +830,31 @@ class CheckoutReceipt extends Component {
                     <h4 class="tc-head">Terms & Conditions</h4>
                   </div>
                   <div class="tc-body">
-                    <ul>
+                  <span dangerouslySetInnerHTML={this.rawMarkup()} />
+
+                    {/* <ul>
+                    
                       <li>
-                        <strong>1.</strong>Your reservation will be subject to
-                        Parking hourly and daily rate as soon as the voucher is
-                        expired. The hourly rate is 10/hour and the daily rate
-                        is $15 for small cars and $18 for SUV/ Trucks per day.
+                        <strong>1.</strong>Your reservation will be subject to Parking hourly and daily rate
+                         as soon as the voucher is expired. The hourly rate is 10/hour and the daily rate is 
+                         $15 for small cars and $18 for SUV/ Trucks per day.
                       </li>
                       <li>
-                        <strong>2.</strong>This facility does NOT allow in/out
-                        privileges. You CANNOT enter & exit more than once.
+                        <strong>2.</strong>This facility does NOT allow in/out privileges.
+                         You CANNOT enter & exit more than once.
                       </li>
                       <li>
-                        <strong>3.</strong>For all Canceled online
-                        vouchers/Reservation customers are required to pay for
-                        one day of parking and a $10 service fee.
+                        <strong>3.</strong>For all Canceled online vouchers/Reservation 
+                        customers are required to pay for one day of parking and a $10 service fee.
                       </li>
                       <li>
-                        <strong>4.</strong>This facility does not allow online
-                        reservation extensions. Additional time must be paid
-                        on-site at a regular rate.
+                        <strong>4.</strong>This facility does not allow online reservation extensions.
+                         Additional time must be paid on-site at a regular rate.
                       </li>
                       <li>
-                        <strong>5.</strong>Customer is required to take pictures
-                        of their vehicles (all sides) at the location during
-                        drop-off and also agree that no damage claim can be
-                        filed without providing those pictures.
+                        <strong>5.</strong>Customer is required to take pictures of their vehicles 
+                        (all sides) at the location during drop-off and also agree that
+                         no damage claim can be filed without providing those pictures.
                       </li>
                       {/* <li>
                         <strong>6.</strong>Customer must leave the car key to
@@ -891,8 +864,8 @@ class CheckoutReceipt extends Component {
                       <li>
                         <strong>7.</strong>Customer agree that all balance must
                         be paid in full prior to retrieval of vehicle.
-                      </li> */}
-                    </ul>
+                      </li>
+                    </ul> */}
                   </div>
                   {/* <div class="tc-footer">
                     <div class="tcf-left">
@@ -912,9 +885,9 @@ class CheckoutReceipt extends Component {
                     </div>
                   </div> */}
                 </div>
-                <div style={{ textAlign: "center", margin: '10px' ,background: 'white', padding: '10px'}}>
+                <div style={{ textAlign: "center", margin: '10px' ,background: 'white', padding: '15px'}}>
                         <QRCode
-                          size={"64"}
+                          size={"70"}
                           value={
                             "http://ec2-44-201-80-160.compute-1.amazonaws.com/#/search"
                           }
@@ -928,7 +901,7 @@ class CheckoutReceipt extends Component {
             <button style={{ display: "none" }} id="recieptprint">
               Print
             </button>
-            <div id="capture" class="col30">
+            <div id="capture" class="col30 vertical-dashed-line">
               {/* <div class="sub-card updated vehicle-spacing">
                 <div class="sub-card-header">
                   <h4 class="sub-card-head">Vehicle's Receipt</h4>
@@ -1101,13 +1074,13 @@ class CheckoutReceipt extends Component {
                             <p>+918298738900</p>
                           </div>
                         </div>
-                        <div class="reserve-data">
+                        <div class="reserve-data-upper">
                             <h4 class="bold">{this.state.receiptData.parking &&
                             this.state.receiptData.parking.display_slot
                               ? this.state.receiptData.parking.display_slot
                               : "NA"}</h4>
                           </div>
-                          <div class="reserve-data">
+                          <div class="reserve-data-upper">
                             <p class="light">Pickup : Date
                             </p><h4 class="bold">{this.state.receiptData.parking &&
                               this.state.receiptData.pick_up_time

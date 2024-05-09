@@ -431,7 +431,6 @@ class Dashboard extends Component {
               </NavLink>
               <NavLink to="/checkout/modify">
                 <button type="button" className="pp-custom-btn ">
-                  <img src={editImage} />
                   Modify and search
                 </button>
               </NavLink>

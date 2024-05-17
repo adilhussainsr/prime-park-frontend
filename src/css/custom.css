@@ -667,7 +667,7 @@ span[class*="ion-"] {
 }
 .vertical-dashed-line {
 	border-left: 1px dashed #000; /* Adjust thickness and color as needed */
-	height: auto; /* Adjust height as needed */
+	height: 790px; /* Adjust height as needed */
   }
 .dc-wrap{
 	padding: 80px;

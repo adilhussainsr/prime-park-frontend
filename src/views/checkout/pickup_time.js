@@ -114,10 +114,26 @@ class PickupTime extends Component {
       }
 
 
-      this.props.history.push({
-        pathname: '/checkout/parkingblock',
-          state: data // your data array of objects
-      })  
+      // this.props.history.push({
+      //   pathname: '/checkout/parkingblock',
+      //     state: data // your data array of objects
+      // })  
+
+        // checkin
+      
+        var headerdata = "";
+        var s = _callApi(data, "booking/checkin", headerdata).then((response) => {
+          if (response.status == 200) {
+            if (response.data.status === 200) {
+              console.log(response.data);
+              var self = this;
+              self.props.history.push({
+                pathname: "/checkout/checkout_review/" + response.data.id,
+              });
+            }
+          }
+        });
+              // checkin end
 
       // var headerdata = "";
       // var s = _callApi(data, "booking/checkin", headerdata).then((response) => {

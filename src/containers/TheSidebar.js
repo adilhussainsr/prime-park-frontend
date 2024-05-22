@@ -6,6 +6,7 @@ import box from '../img/icons/box.svg';
 import user from '../img/icons/user.svg';
 import file from '../img/icons/file.svg';
 import dashboard from '../img/icons/dashboard.svg';
+import request_service from '../img/icons/Slicing/request_service.svg';
 import { NavLink } from 'react-router-dom';
 
 class TheSidebar extends Component {
@@ -27,6 +28,7 @@ class TheSidebar extends Component {
       <div className="dashboard-sidebar">
         <ul className="ds-list">
           <li><NavLink activeClassName={"active"} to="/dashboard"><img src={dashboard} /></NavLink></li>
+          <li><NavLink activeClassName={"active"} to="/users/dashboard"><img src={request_service} /></NavLink></li>
           <li><NavLink activeClassName={"active"} to="/reports/list"><img src={file}/></NavLink></li>
           <li><NavLink activeClassName={"active"} to="/users/list"><img src={user} /></NavLink></li>
           {/* <li><NavLink to="/"><img src={box} /></NavLink></li> */}

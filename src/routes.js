@@ -13,6 +13,8 @@ const AddVendor = React.lazy(() => import('./views/vendors/add_vendor'));
 const Settings = React.lazy(() => import('./views/settings/index'));
 const Reports = React.lazy(() => import('./views/reports/index'));
 const Users = React.lazy(() => import('./views/users/index'));
+const UsersDashboard = React.lazy(() => import('./views/users/dashboard'));
+const CancelReqDashboard = React.lazy(() => import('./views/users/cancelreqdashboard'));
 const AddUser = React.lazy(() => import('./views/users/add_user'));
 const Policies = React.lazy(() => import('./views/settings/policies'));
 
@@ -82,6 +84,8 @@ const routes = [
   { path: '/settings/policies', name: 'Policies', component: Policies, exact: true },
   { path: '/settings/upload-csv', name: 'Upload Csv', component: UploadCsv, exact: true },
   /***************************Users Section*****************************/
+  { path: '/users/dashboard', name: 'Users', component: UsersDashboard, exact: true },
+  { path: '/users/cancel-req-dashboard', name: 'Users', component: CancelReqDashboard, exact: true },
   { path: '/users/list', name: 'Users', component: Users, exact: true },
   { path: '/users/add', name: 'Add User', component: AddUser, exact: true },
   { path: '/users/edit/:id', name: 'Edit User', component: AddUser },

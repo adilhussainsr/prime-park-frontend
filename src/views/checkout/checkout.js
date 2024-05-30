@@ -84,7 +84,7 @@ class Checkout extends Component {
 							<div class="card-left card-w-70">
 								<div class="sc-bg-white">
 									<div class="card-header">
-										<h4>Prime Park Receipt</h4>
+										<h4>Airport Parking Receipt</h4>
 										<p>15115 Lefferts Blvd south Ozone Park NY 11420
 										</p>
 										<div class="ch-extra">

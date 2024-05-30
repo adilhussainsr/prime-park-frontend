@@ -202,7 +202,7 @@ class CheckoutReceipt extends Component {
                     <div class="card-left card-w-60 mr-1" >
                       <div class="sc-bg-white">
                         <div class="card-header">
-                          <h4>Prime Park Receipt</h4>
+                          <h4>Airport Parking Receipt</h4>
                           <p>
                             206 S Weller St, Seattle, WA 98104, United States
                           </p>
@@ -514,7 +514,7 @@ class CheckoutReceipt extends Component {
                   <div class="card-left card-w-60 mr-1">
                     <div class="sc-bg-white">
                       <div class="card-header">
-                        <h4>Prime Park Receipt</h4>
+                        <h4>Airport Parking Receipt</h4>
                         <p>206 S Weller St, Seattle, WA 98104, United States</p>
                         <div class="ch-extra">
                           <div class="extra-item">
@@ -910,7 +910,7 @@ class CheckoutReceipt extends Component {
                   <div class="card-left">
                     <div class="sc-bg-white">
                       <div class="card-header">
-                        <h4>Prime Park JFK</h4>
+                        <h4>Airport Parking JFK</h4>
                         <p>15115 Lefferts Blvd South Ozone Park NY 11420</p>
                         <div class="ch-extra">
                           <div class="extra-item">
@@ -1067,7 +1067,7 @@ class CheckoutReceipt extends Component {
                   <div class="card-left mr-1">
                     <div class="sc-bg-white">
                       <div class="card-header">
-                        <h4>Prime Park JFK</h4>
+                        <h4>Airport Parking JFK</h4>
                         <p>15115 Lefferts Blvd South Ozone Park NY 11420</p>
                         <div class="ch-extra">
                           <div class="extra-item"><span class="ion-ios-telephone-outline"></span>
